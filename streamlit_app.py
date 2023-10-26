@@ -2,4 +2,4 @@ import streamlit
 streamlit.title("My Parents New Healthy Diner")
 
 
-learning to commit changes.
+print("learning to commit changes.")
