@@ -7,7 +7,6 @@ streamlit.title("My Parents New Healthy Diner")
 streamlit.header('  🥗 🐔 Breakfast Menu')
 streamlit.text(' 🥣 Omega 3 & Blueberry Oatmeal')
 streamlit.header("  🥣 🥗 🐔 🥑🍞 Make your Own Breakfast")
-
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 streamlit.dataframe(my_fruit_list)
 my_fruit_list = my_fruit_list.set_index('Fruit')
@@ -17,7 +16,7 @@ streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index), ['Avocado'
 fruits_selected = streamlit.multiselect("Pick some fruits.", list(my_fruit_list.index), ['Avocado', 'Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 streamlit.dataframe(fruits_to_show)
-streamlit.text('The user entered ', fruit_choice)
+streamlit.write("The user entered ", fruit_choice)
 streamlit.text(fruityvice_response)
 
 #create the repeatable block of code called function
@@ -25,6 +24,7 @@ def get_fruityvice_data(this_fruit_choice):
    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
    return fruityvice_normalized
+
 #new section to display fuityvice api response
 streamlit.header("Fruityvice Fruit Advice!")
 try:
