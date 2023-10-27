@@ -41,7 +41,7 @@ streamlit.header("Fruityvice Fruit Advice!")
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # taking the output to display on streamlit
 streamlit.dataframe(fruityvice_normalized)
-streanlit.stop()
+streamlit.stop()
 
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
