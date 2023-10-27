@@ -5,7 +5,6 @@ import snowflake.connector
 from urllib.error import URLError
 
 streamlit.title("My Parents New Healthy Diner")
-
 streamlit.header('  🥗 🐔 Breakfast Menu')
 streamlit.text(' 🥣 Omega 3 & Blueberry Oatmeal')
 streamlit.text(' 🥗 Kale, Spinach & Rocket Smoothie')
@@ -23,7 +22,6 @@ streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index), ['Avocado'
 fruits_selected = streamlit.multiselect("Pick some fruits.", list(my_fruit_list.index), ['Avocado', 'Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 streamlit.dataframe(fruits_to_show)
-
 streamlit.write('The user entered ', fruit_choice)
 streamlit.text(fruityvice_response)
 
@@ -42,6 +40,8 @@ try:
   else:
     back_from_function = get_fruityvice_data(fruit_choice)
     streamlit.dataframe(back_from_function)
+except URLError as e:
+   streamlit.error()
    
 
 streamlit.header("The fruit load list contains:|")
