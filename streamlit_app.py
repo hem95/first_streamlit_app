@@ -19,17 +19,13 @@ my_fruit_list = my_fruit_list.set_index('Fruit')
 
 # Let's put a pick list here so they can pick the fruit they want to include 
 streamlit.multiselect("Pick some fruits.", list(my_fruit_list.index))
-
 streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index), ['Avocado', 'Strawberries'])
-
 fruits_selected = streamlit.multiselect("Pick some fruits.", list(my_fruit_list.index), ['Avocado', 'Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 streamlit.dataframe(fruits_to_show)
 
 streamlit.write('The user entered ', fruit_choice)
-
 streamlit.text(fruityvice_response)
-
 
 #create the repeatable block of code called function
 def get_fruityvice_data(this_fruit_choice):
@@ -48,7 +44,7 @@ try:
     streamlit.dataframe(back_from_function)
    
 
-streamlit.header("the stream load list contains:")
+streamlit.header("The stream load list contains:")
 #snowflake-related-functions
 def get_fruit_load_list():
    with cnx.cursor() as my_cur:
@@ -61,7 +57,7 @@ if streamlit.button('Get Fruit Load List'):
    my_data_rows=get_fruit_load_list()
    streamlit.dataframe(my_data_rows)
    
-
+streamlit.stop()
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
