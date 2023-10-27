@@ -3,19 +3,14 @@ import pandas
 import requests
 import snowflake.connector
 from urllib.error import URLError
-
 streamlit.title("My Parents New Healthy Diner")
 streamlit.header('  🥗 🐔 Breakfast Menu')
 streamlit.text(' 🥣 Omega 3 & Blueberry Oatmeal')
-streamlit.text(' 🥗 Kale, Spinach & Rocket Smoothie')
-streamlit.text('  🥣 Hard-Boiled Free-Range Egg')
-streamlit.text("  🥑 Avacado Toast")
 streamlit.header("  🥣 🥗 🐔 🥑🍞 Make your Own Breakfast")
 
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 streamlit.dataframe(my_fruit_list)
 my_fruit_list = my_fruit_list.set_index('Fruit')
-
 # Let's put a pick list here so they can pick the fruit they want to include 
 streamlit.multiselect("Pick some fruits.", list(my_fruit_list.index))
 streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index), ['Avocado', 'Strawberries'])
@@ -30,7 +25,6 @@ def get_fruityvice_data(this_fruit_choice):
    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
    return fruityvice_normalized
-
 #new section to display fuityvice api response
 streamlit.header("Fruityvice Fruit Advice!")
 try:
@@ -43,7 +37,6 @@ try:
 except URLError as e:
    streamlit.error()
    
-
 streamlit.header("The fruit load list contains:|")
 #snowflake-related-functions
 def get_fruit_load_list():
